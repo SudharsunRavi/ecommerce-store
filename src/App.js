@@ -30,7 +30,7 @@ function App() {
   ])
   return (
     <Provider store={appStore}>
-      <div className="mx-10 my-7">
+      <div>
         <RouterProvider router={appRouter}/>
       </div>
     </Provider>

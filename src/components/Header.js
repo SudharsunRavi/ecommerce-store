@@ -2,23 +2,21 @@ import {  onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-
+import { Link } from "react-router-dom";
 import { addUser, removeUser } from "../utils/redux/userSlice";
+import { useEffect } from "react";
+import { LOGO } from "../utils/constants";
 
 const Header = () => {
   const dispatch=useDispatch()
-  const navigate=useNavigate()
-  const user=useSelector((appStore)=>appStore.user)
 
-  // const [isSignIn] = useContext()
+  const user=useSelector((state)=>state.user)
+  const isSignIn = useSelector((state) => state.user.isSignIn);
 
   const handleSignOut=()=>{
     signOut(auth)
     .then(() => {})
     .catch((error) => {
-        navigate("/error")
     })
   }
 
@@ -26,11 +24,9 @@ const Header = () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, email } = user;
-        dispatch(addUser({ uid: uid, email: email }));
-        navigate('/products');
+        dispatch(addUser({ uid: uid, email: email, displayName: email.split('@')[0] }));
       } else {
         dispatch(removeUser());
-        navigate('/');
       }
     });
 
@@ -40,20 +36,34 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="flex justify-between">
+    <div className="absolute px-8 py-2 bg-gradient-to-b from-black w-screen z-10">
+      <div className="flex justify-between text-white">
         <div>
-            <h1>Nike</h1>
+            <img src={LOGO} alt="logo" className="h-[100px] w-[90px] ml-5" />
         </div>
 
         <div>
-            <ul className="flex flex-row">
-                <li className="px-3">Home</li>
-                <li className="px-3">Products</li>
-                <li className="px-3">Cart</li>
-                <li className="px-3">Login</li>
-                <button onClick={handleSignOut}>Sign Out</button>
-            </ul>
+          <ul className="flex flex-row mx-7 my-10">
+            <Link to="/">
+              <li className="px-3 hover:text-gray-500">Home</li>
+            </Link>
+
+            <Link to={isSignIn ? "/products" : "/login"}>
+              <li className="px-3 hover:text-gray-500">Products</li>
+            </Link>
+            
+            <Link to="/cart">
+              <li className="px-3 hover:text-gray-500">Cart</li>
+            </Link>
+
+            <Link to="/login">
+              <li className="px-3 hover:text-gray-500">Login</li>
+            </Link>
+            
+              {isSignIn && <button onClick={handleSignOut}>Sign Out</button>}
+          </ul>
         </div>
+      </div>
     </div>
   )
 }

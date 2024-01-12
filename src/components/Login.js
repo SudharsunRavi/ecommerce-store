@@ -1,16 +1,17 @@
 import { createUserWithEmailAndPassword , signInWithEmailAndPassword, updateProfile} from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useContext, useRef, useState } from "react"
+import { createContext, useContext, useRef, useState } from "react"
 import { useDispatch } from "react-redux";
 
 import Validation from "../utils/validation";
 import { addUser } from "../utils/redux/userSlice";
 import { useNavigate } from "react-router-dom";
+import Header from "./Header";
+import { LOGIN_BG } from "../utils/constants";
 
 const Login = () => {
     const dispatch=useDispatch();
     const navigate=useNavigate();
-    // const loginState=useContext();
 
     const name = useRef();
     const email = useRef();
@@ -18,6 +19,8 @@ const Login = () => {
 
     const [isSignIn, setIsSignIn] = useState(false);
     const [error, setError] = useState("");
+
+
 
     const handleSignIn=()=>setIsSignIn(!isSignIn);
 
@@ -71,16 +74,21 @@ const Login = () => {
 
   return (
     <div>
-        <form onSubmit={(e)=>e.preventDefault()}>
-            {isSignIn && <input ref={name} type="text" placeholder="Name" />}
-            <input ref={email} type="text" placeholder="Email" />
-            <input ref={password} type="password" placeholder="Password" />
-            <button onClick={handleValidation}>{isSignIn ? "Sign Up" : "Sign In"}</button>
-        </form>
-
-        <p className="py-3 cursor-pointer" onClick={handleSignIn}>{!isSignIn ? "New user? Sign up" : "Already a user? Sign in"}</p>
-
-        {/* <loginState.Provider value={[isSignIn, setIsSignIn]}></loginState.Provider> */}
+        <Header/>
+        <img src={LOGIN_BG} alt="bg" className="absolute object-cover w-full h-full"/>
+        <div className="absolute w-3/12 h-[450px] m-auto pt-[90px] pl-[40px] my-44 right-0 left-0 bg-black bg-opacity-85 rounded-lg">
+            <form onSubmit={(e)=>e.preventDefault()}>
+                {isSignIn && <><input ref={name} type="text" placeholder="Name" className="mx-6 mb-6 p-2 w-72 border rounded-lg" /> <br/></>}
+                <input ref={email} type="text" placeholder="Email" className="mx-6 mb-6 p-2 w-72 border rounded-lg" /> <br/>
+                <input ref={password} type="password" placeholder="Password" className="mx-6 mb-6 p-2 w-72 border rounded-lg" /> <br/><br/>
+                <button onClick={handleValidation} className="mx-6 mb-3 p-2 bg-gray-800 text-white rounded-xl hover:bg-white hover:text-black hover:border-black hover:border-[3px]">{isSignIn ? "Sign Up" : "Sign In"}</button>
+            </form>
+            <div className="px-[25px]">
+                <p className="text-red-500">{error}</p>
+                <p className="cursor-pointer text-white hover:underline" onClick={handleSignIn}>{!isSignIn ? "New user? Sign up" : "Already a user? Sign in"}</p>
+            </div>
+                
+        </div>    
     </div>
   )
 }
