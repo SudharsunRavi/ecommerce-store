@@ -56,9 +56,9 @@ const Header = () => {
               <li className="px-3 hover:text-gray-500">Cart</li>
             </Link>
 
-            <Link to="/login">
+            {!isSignIn && <Link to="/login">
               <li className="px-3 hover:text-gray-500">Login</li>
-            </Link>
+            </Link>}
             
               {isSignIn && <button onClick={handleSignOut}>Sign Out</button>}
           </ul>
