@@ -13,6 +13,8 @@ const Header = () => {
   const user=useSelector((state)=>state.user)
   const isSignIn = useSelector((state) => state.user.isSignIn);
 
+  const cartValue=useSelector((state)=>state.cart.cartItems.length)
+
   const handleSignOut=()=>{
     signOut(auth)
     .then(() => {})
@@ -52,8 +54,8 @@ const Header = () => {
               <li className="px-3 hover:text-gray-500">Products</li>
             </Link>
             
-            <Link to="/cart">
-              <li className="px-3 hover:text-gray-500">Cart</li>
+            <Link to={isSignIn ? "/cart" : "/login"}>
+              <li className="px-3 hover:text-gray-500">Cart<span>({cartValue})</span></li>
             </Link>
 
             {!isSignIn && <Link to="/login">

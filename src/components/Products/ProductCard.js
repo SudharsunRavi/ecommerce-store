@@ -3,7 +3,7 @@ import { data } from "../../utils/data"
 
 const ProductCard = () => {
     const productData=data?.products?.products
-    console.log(productData[0])
+    //console.log(productData[0])
 
   return (
     <div className="pt-36 pl-[285px]">

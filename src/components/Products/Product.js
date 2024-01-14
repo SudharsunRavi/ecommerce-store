@@ -2,11 +2,17 @@ import { useParams } from "react-router-dom"
 import { data } from "../../utils/data"
 import { useEffect, useState } from "react";
 import Header from "../Header";
+import { addItem, increaseItem } from "../../utils/redux/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Product = () => {
     const { pid } = useParams();
+    const cartItems=useSelector((store)=>store.cart.cartItems)
+
     const [product, setProduct]=useState(null);
     const [colorway, setColorway] = useState(null);
+
+    const dispatch=useDispatch()
 
     useEffect(() => {
     const fetchColorwayData = async () => {
@@ -16,17 +22,26 @@ const Product = () => {
         p.colorways.some((c) => c.pid === pid)
       );
       setProduct(selectedProduct);
-        console.log(selectedProduct)
+      //console.log(selectedProduct)
 
       const selectedColorway = selectedProduct?.colorways.find(
         (c) => c.pid === pid
       );
-      console.log(selectedColorway)
+      //console.log(selectedColorway)
       setColorway(selectedColorway);
     };
 
     fetchColorwayData();
   }, [pid]);
+
+  const handleAddToCart = (colorway) => {
+    const existingItem = cartItems.find(item => item.pid === colorway.pid);
+    if (existingItem) {
+      dispatch(increaseItem(colorway));
+    } else {
+      dispatch(addItem(colorway));
+    }
+  };
 
   return (
     <div>
@@ -41,7 +56,7 @@ const Product = () => {
                 <p className="text-gray-500">(Also includes all applicable duties)</p>
                 <h1 className="text-lg my-6"><span className="font-semibold">Color shown: </span>{colorway?.colorDescription}</h1>
                 <div>
-                    <button className="bg-black rounded-3xl text-white w-48 py-3 mt-8">Add to Bag</button>
+                    <button className="bg-black rounded-3xl text-white w-48 py-3 mt-8" onClick={()=>handleAddToCart(colorway)}>Add to Bag</button>
                 </div>
             </div>
         </div>
