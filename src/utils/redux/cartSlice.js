@@ -1,13 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const loadCartFromLocalStorage = () => {
-    try {
+    try{
       const serializedCart = localStorage.getItem('cart');
       const parsedCart = serializedCart ? JSON.parse(serializedCart) : null;
-  
-      // Ensure that cartItems is an array, default to an empty array if not
       return parsedCart && Array.isArray(parsedCart.cartItems) ? parsedCart : { cartItems: [] };
-    } catch (error) {
+    }
+    catch (error){
       console.error('Error loading cart from local storage:', error);
       return { cartItems: [] };
     }
@@ -28,8 +27,16 @@ const cartSlice=createSlice({
         loadCartFromLocalStorage(),
     reducers:{
         addItem:(state,action)=>{
-            state.cartItems.push(action.payload)
-            saveCartToLocalStorage(state);
+            // state.cartItems.push(action.payload)
+            // saveCartToLocalStorage(state);
+          const newItem = action.payload;
+          const existingItem = state.cartItems.find(item => item.pid === newItem.pid);
+          if (existingItem){
+            existingItem.length += 1;
+          }else{
+            state.cartItems.push({ ...newItem, length: 1 });
+          }
+          saveCartToLocalStorage(state);
         },
         removeItem: (state, action) => {
             const { pid } = action.payload;

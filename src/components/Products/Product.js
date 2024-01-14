@@ -35,12 +35,23 @@ const Product = () => {
   }, [pid]);
 
   const handleAddToCart = (colorway) => {
-    const existingItem = cartItems.find(item => item.pid === colorway.pid);
+    const { pid, size } = colorway;
+  
+    const existingItem = cartItems.find(item => item.pid === pid && item.size === size);
+  
     if (existingItem) {
       dispatch(increaseItem(colorway));
     } else {
-      dispatch(addItem(colorway));
+      dispatch(addItem({ ...colorway, size: selectedSize }));
     }
+    setSelectedSize(null);
+  };
+  
+
+  const [selectedSize, setSelectedSize] = useState(null);
+
+  const handleButtonClick = (size) => {
+    setSelectedSize(size === selectedSize ? null : size);
   };
 
   return (
@@ -56,6 +67,38 @@ const Product = () => {
                 <p className="text-gray-500">(Also includes all applicable duties)</p>
                 <h1 className="text-lg my-6"><span className="font-semibold">Color shown: </span>{colorway?.colorDescription}</h1>
                 <div>
+                  <div className="flex">
+                    <button
+                      className={'outline rounded-md p-2' + (selectedSize === 'UK 07' ? ' bg-black text-white' : '')}
+                      onClick={() => handleButtonClick('UK 07')}
+                    >
+                      UK 7
+                    </button>
+                    <button
+                      className={"outline rounded-md p-2 ml-4" + (selectedSize === 'UK 08' ? ' bg-black text-white' : '')}
+                      onClick={() => handleButtonClick('UK 08')}
+                    >
+                      UK 8
+                    </button>
+                    <button
+                      className={"outline rounded-md p-2 ml-4" + (selectedSize === 'UK 09' ? ' bg-black text-white' : '')}
+                      onClick={() => handleButtonClick('UK 09')}
+                    >
+                      UK 9
+                    </button>
+                    <button
+                      className={"outline rounded-md p-2 ml-4" + (selectedSize === 'UK 10' ? ' bg-black text-white' : '')}
+                      onClick={() => handleButtonClick('UK 10')}
+                    >
+                      UK 10
+                    </button>
+                    <button
+                      className={"outline rounded-md p-2 ml-4" + (selectedSize === 'UK 11' ? ' bg-black text-white' : '')}
+                      onClick={() => handleButtonClick('UK 11')}
+                    >
+                      UK 11
+                    </button>
+                  </div>
                     <button className="bg-black rounded-3xl text-white w-48 py-3 mt-8" onClick={()=>handleAddToCart(colorway)}>Add to Bag</button>
                 </div>
             </div>

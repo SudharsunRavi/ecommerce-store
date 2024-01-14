@@ -43,6 +43,7 @@ import { EMPTY_CART_IMG } from '../utils/constants'
 
                   <div className='mt-16 ml-4'>
                     <p className="font-semibold text-xl mt-2">{item.colorDescription}</p>
+                    <p className="text-gray-500 text-sm">{item.size}</p>
                     <p className="font-semibold text-md">₹ {item.price.discounted ? item.price.currentPrice : item.price.fullPrice}</p>
                   </div>
 
