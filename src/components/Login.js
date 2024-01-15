@@ -1,12 +1,11 @@
 import { createUserWithEmailAndPassword , signInWithEmailAndPassword, updateProfile} from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { createContext, useContext, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { useDispatch } from "react-redux";
 
 import Validation from "../utils/validation";
 import { addUser } from "../utils/redux/userSlice";
 import { useNavigate } from "react-router-dom";
-import Header from "./Header";
 import { LOGIN_BG } from "../utils/constants";
 
 const Login = () => {
@@ -73,10 +72,9 @@ const Login = () => {
     }
 
   return (
-    <div>
-        <Header/>
+    <div className="-mt-14">
         <img src={LOGIN_BG} alt="bg" className="absolute object-cover w-full h-full"/>
-        <div className="absolute w-3/12 h-[450px] m-auto pt-[90px] pl-[40px] my-44 right-0 left-0 bg-black bg-opacity-85 rounded-lg">
+        <div className="absolute w-3/12 h-[450px] mx-auto pt-[90px] pl-[40px] mt-44 right-0 left-0 bg-black bg-opacity-85 rounded-lg">
             <form onSubmit={(e)=>e.preventDefault()}>
                 {isSignIn && <><input ref={name} type="text" placeholder="Name" className="mx-6 mb-6 p-2 w-72 border rounded-lg" /> <br/></>}
                 <input ref={email} type="text" placeholder="Email" className="mx-6 mb-6 p-2 w-72 border rounded-lg" /> <br/>

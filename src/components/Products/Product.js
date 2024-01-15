@@ -56,7 +56,6 @@ const Product = () => {
 
   return (
     <div>
-        <Header/>
         <div className="pt-40 flex justify-center">
             <img src={colorway?.images?.portraitURL} alt="product" className="rounded-2xl w-[450px]" />
             <div className="pl-10">

@@ -23,8 +23,7 @@ import { EMPTY_CART_IMG } from '../utils/constants'
     }
 
     return (
-      <div>
-        <Header/>
+      <div className='min-h-screen'>
         <div className='pt-36'>
           <h1 className='absolute left-[50%] font-bold text-5xl'>Cart</h1>
           <div className='pl-[300px] mt-24'>
