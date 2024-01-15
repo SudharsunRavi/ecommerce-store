@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { addUser, removeUser } from "../utils/redux/userSlice";
 import { useEffect } from "react";
 import { LOGO, LOGO_WHITE } from "../utils/constants";
-import useTheme from "../utils/custom hooks/useTheme";
+//import useTheme from "../utils/custom hooks/useTheme";
 
 const Header = () => {
   const dispatch=useDispatch()
@@ -41,8 +41,8 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute px-8 py-2 bg-gradient-to-b from-black w-screen z-10">
-      <div className="flex justify-between text-white">
+    <div className="absolute px-8 py-2 w-screen z-10">
+      <div className="flex justify-between text-neutral-900">
         <div>
             {/* {dark ? <img src={LOGO_WHITE} alt="logo-white" className="h-[55px] w-[90px] mt-5 ml-5" /> : <img src={LOGO} alt="logo" className="h-[100px] w-[90px] ml-5" />} */}
             <img src={LOGO} alt="logo" className="h-[100px] w-[90px] ml-5" />
@@ -52,22 +52,26 @@ const Header = () => {
           <ul className="flex flex-row mx-7 my-10">
             {/* <button onClick={toggleTheme}>Toggle Theme</button> */}
             <Link to="/">
-              <li className="px-3 hover:text-gray-500">Home</li>
+              <li className="px-3 hover:text-black hover:text-xl hover:underline text-lg">Home</li>
             </Link>
 
             <Link to={isSignIn ? "/products" : "/login"}>
-              <li className="px-3 hover:text-gray-500">Products</li>
+              <li className="px-3 hover:text-black hover:text-xl hover:underline text-lg">Products</li>
+            </Link>
+
+            <Link to="/contact">
+              <li className="px-3 hover:text-black hover:text-xl hover:underline text-lg">Contact us</li>
             </Link>
             
             <Link to={isSignIn ? "/cart" : "/login"}>
-              <li className="px-3 hover:text-gray-500">Cart<span>({cartValue})</span></li>
+              <li className="px-3 hover:text-black hover:text-xl hover:underline text-lg"><i className="fa fa-cart-plus text-xl pr-2 hover:text-black hover:text-xl hover:underline" /><span className="-mt-2 text-lg hover:text-black hover:text-xl hover:underline">({cartValue})</span></li>
             </Link>
 
             {!isSignIn && <Link to="/login">
-              <li className="px-3 hover:text-gray-500">Login</li>
+              <li className="px-3 hover:text-black hover:text-xl hover:underline text-lg">Login</li>
             </Link>}
             
-              {isSignIn && <button onClick={handleSignOut}>Sign Out</button>}
+              {isSignIn && <button className="bg-black text-white px-2 py-2 -mt-1 ml-2 rounded-xl hover:bg-neutral-100 hover:text-black hover:border-black" onClick={handleSignOut}>Sign Out</button>}
           </ul>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -11,8 +11,9 @@ import ProductPage from "./components/Products/ProductPage"
 import Product from "./components/Products/Product"
 import Cart from "./components/Cart"
 import appStore from "./utils/redux/appStore";
-import Error from './components/Error';
 import Footer from './components/Footer';
+import Contact from './components/Contact';
+import Error from './components/Error';
 
 const AppLayout=()=>{
   return (
@@ -45,6 +46,10 @@ const appRouter=createBrowserRouter([
       {
         path: "/products/:pid",
         element: <Product/>,
+      },
+      {
+        path: "/contact",
+        element: <Contact/>,
       },
       {
         path: "/cart",

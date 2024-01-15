@@ -72,14 +72,15 @@ const Login = () => {
     }
 
   return (
-    <div className="-mt-14">
+    <div className="">
         <img src={LOGIN_BG} alt="bg" className="absolute object-cover w-full h-full"/>
         <div className="absolute w-3/12 h-[450px] mx-auto pt-[90px] pl-[40px] mt-44 right-0 left-0 bg-black bg-opacity-85 rounded-lg">
             <form onSubmit={(e)=>e.preventDefault()}>
                 {isSignIn && <><input ref={name} type="text" placeholder="Name" className="mx-6 mb-6 p-2 w-72 border rounded-lg" /> <br/></>}
                 <input ref={email} type="text" placeholder="Email" className="mx-6 mb-6 p-2 w-72 border rounded-lg" /> <br/>
-                <input ref={password} type="password" placeholder="Password" className="mx-6 mb-6 p-2 w-72 border rounded-lg" /> <br/><br/>
-                <button onClick={handleValidation} className="mx-6 mb-3 p-2 bg-gray-800 text-white rounded-xl hover:bg-white hover:text-black hover:border-black hover:border-[3px]">{isSignIn ? "Sign Up" : "Sign In"}</button>
+                <input ref={password} type="password" placeholder="Password" className="mx-6 mb-0 p-2 w-72 border rounded-lg" /> <br/><br/>
+                <p className="text-red-500 text-sm ml-6">The Password must contain 1 Captial, 1 lowercase,<br/> 1 Special character and 1 number</p>
+                <button onClick={handleValidation} className="mx-6 mb-3 mt-4 p-2 bg-gray-800 text-white rounded-xl hover:bg-white hover:text-black hover:border-black hover:border-[3px]">{isSignIn ? "Sign Up" : "Sign In"}</button>
             </form>
             <div className="px-[25px]">
                 <p className="text-red-500">{error}</p>

@@ -7,3 +7,5 @@ export const LOGO_WHITE = require('../assets/logo-white.png')
 export const EMPTY_CART_IMG=require("../assets/cart.png");
 
 export const LANDING_BG=require("../assets/landing-bg2.jpg");
+
+export const ERROR_IMG=require("../assets/error.png");
