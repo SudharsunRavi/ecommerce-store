@@ -8,7 +8,7 @@ const Footer = () => {
             <h1 className="text-white text-xl font-bold pl-14">NIKE</h1>
             <p className="pl-10 pt-4 mt-6 text-white">Follow us on:</p>
 
-            <div class="flex gap-3 pt-3 pl-10">
+            <div className="flex gap-3 pt-3 pl-10">
                 <a href="www.facebook.com" target="_blank">
                     <i className="fa fa-facebook-f text-white text-xl"></i>
                 </a>
