@@ -68,7 +68,7 @@ const Header = () => {
             </Link>
 
             {!isSignIn && <Link to="/login">
-              <li className="px-3 hover:text-black hover:text-xl hover:underline text-lg">Login</li>
+              <li className="text-lg bg-black text-white  hover:bg-neutral-100 hover:text-black hover:border-black rounded-xl px-2 py-1 -mt-1">Login</li>
             </Link>}
             
               {isSignIn && <button className="bg-black text-white px-2 py-2 -mt-1 ml-2 rounded-xl hover:bg-neutral-100 hover:text-black hover:border-black" onClick={handleSignOut}>Sign Out</button>}
