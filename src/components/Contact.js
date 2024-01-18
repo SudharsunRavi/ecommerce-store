@@ -23,11 +23,11 @@ export const Contact = () => {
         <div className='border-2 border-black h-[70%] pl-4 pt-4 rounded-lg shadow-xl'>
             <form ref={form} onSubmit={sendEmail}>
                 <label className='text-2xl'>Name</label>
-                <input type="text" name="user_name" className='ml-[47px] border rounded-md mb-6 w-56 h-8' autoComplete="off" /><br/>
+                <input type="text" name="user_name" className='ml-[47px] border rounded-md mb-6 w-56 h-8' autoComplete="off" required /><br/>
                 <label className='text-2xl'>Email</label>
-                <input type="email" name="user_email" className='border rounded-md mb-6 ml-[52px] h-8 w-56' autoComplete="off"/><br/>
+                <input type="email" name="user_email" className='border rounded-md mb-6 ml-[52px] h-8 w-56' autoComplete="off" required/><br/>
                 <label className='text-2xl'>Message</label>
-                <textarea name="message" className='ml-4 border rounded-md -mb-9 w-56 h-20' autoComplete="off"/><br/>
+                <textarea name="message" className='ml-4 border rounded-md -mb-9 w-56 h-20' autoComplete="off" required/><br/>
                 <input type="submit" value="Send" className='bg-black text-white px-2 py-1 rounded-xl mt-16 text-xl' /><br/>
             </form>
         </div>
